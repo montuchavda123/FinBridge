@@ -4,16 +4,10 @@ Flask-Login==0.6.3
 Flask-JWT-Extended==4.6.0
 Flask-Mail==0.9.1
 Flask-SQLAlchemy==3.1.1
-
 SQLAlchemy==1.4.52
-alembic==1.17.2
-
 gunicorn==23.0.0
-python-dotenv==1.0.0
+python-dotenv
 requests
 pandas
 numpy
 scikit-learn
-openai
-langchain
-google-generativeai
