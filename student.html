@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Student Resources - CA Bridge{% endblock %}
+
+{% block content %}
+<div class="row py-4 align-items-center mb-5">
+    <div class="col-lg-7">
+        <span class="badge bg-primary-light text-primary px-3 py-2 fw-bold text-uppercase mb-3">Resource Hub</span>
+        <h1 class="display-4 fw-bolder mb-3">Master Your <span class="text-gradient">CA Journey</span></h1>
+        <p class="lead text-secondary">Discover exclusive guides, articleship prep materials, and resume tips to land your dream role.</p>
+    </div>
+    <div class="col-lg-5 text-center d-none d-lg-block position-relative">
+        <div class="position-absolute top-50 start-50 translate-middle bg-info-light rounded-circle" style="width: 250px; height: 250px; filter: blur(50px); opacity: 0.6; z-index: -1;"></div>
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=600" alt="Students learning" class="img-fluid rounded-circle shadow-lg" style="width: 350px; height: 350px; object-fit: cover; border: 8px solid white;">
+    </div>
+</div>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-4">
+        <div class="card h-100 p-4 border-0 shadow-sm transition-all text-center" style="border-radius: var(--radius-xl);">
+            <div class="bg-primary-light text-primary rounded-circle d-inline-flex align-items-center justify-content-center mx-auto mb-3" style="width: 60px; height: 60px;">
+                <i class="bi bi-file-earmark-person fs-3"></i>
+            </div>
+            <h4 class="fw-bold">Resume Builder Guide</h4>
+            <p class="text-secondary small">Learn how to format your resume to pass ATS filters and impress Big4 recruiters.</p>
+            <a href="#" class="btn btn-outline-primary w-100 mt-auto fw-semibold">Read Guide</a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 p-4 border-0 shadow-sm transition-all text-center" style="border-radius: var(--radius-xl);">
+            <div class="bg-success-light text-success rounded-circle d-inline-flex align-items-center justify-content-center mx-auto mb-3" style="width: 60px; height: 60px;">
+                <i class="bi bi-mic-fill fs-3"></i>
+            </div>
+            <h4 class="fw-bold">Interview Prep</h4>
+            <p class="text-secondary small">Top 50 technical and HR questions asked during articleship and industrial training interviews.</p>
+            <a href="#" class="btn btn-outline-success w-100 mt-auto fw-semibold">View Questions</a>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 p-4 border-0 shadow-sm transition-all text-center" style="border-radius: var(--radius-xl);">
+            <div class="bg-warning-light text-warning rounded-circle d-inline-flex align-items-center justify-content-center mx-auto mb-3" style="width: 60px; height: 60px;">
+                <i class="bi bi-journal-check fs-3"></i>
+            </div>
+            <h4 class="fw-bold">Firm Insights</h4>
+            <p class="text-secondary small">Deep dives into the culture, work hours, and learning opportunities at top accounting firms.</p>
+            <a href="#" class="btn btn-outline-warning w-100 mt-auto fw-semibold text-dark">Explore Firms</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

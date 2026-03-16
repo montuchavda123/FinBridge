@@ -1,0 +1,396 @@
+{% extends 'base.html' %}
+{% block title %}Student Dashboard{% endblock %}
+{% block content %}
+<!-- Removed global title to use mockup-style internal header -->
+
+<div class="dashboard-grid">
+    <!-- Sidebar / Profile Setup -->
+    <div>
+        <div class="sidebar">
+            <div class="sidebar-header text-center">
+                <div class="profile-avatar mb-3 position-relative">
+                    {{ current_user.full_name[0] | upper }}
+                    <span class="position-absolute bottom-0 end-0 bg-success border border-white rounded-circle"
+                        style="width: 18px; height: 18px;"></span>
+                </div>
+                <h5 class="fw-bold mb-1">{{ current_user.full_name }}</h5>
+                <p class="text-muted small mb-0">{{ current_user.email }}</p>
+            </div>
+
+            <div class="sidebar-nav">
+                <a href="#" class="sidebar-item active">
+                    <i class="bi bi-grid-fill"></i> Dash
+                </a>
+                <a href="#jobs" class="sidebar-item">
+                    <i class="bi bi-search"></i> Jobs
+                </a>
+                <a href="#applications" class="sidebar-item">
+                    <i class="bi bi-file-earmark-check"></i> Applied
+                </a>
+                <a href="{{ url_for('about') }}" class="sidebar-item">
+                    <i class="bi bi-info-circle"></i> Help Center
+                </a>
+            </div>
+
+            {% if profile.resume_ai_feedback %}
+            <div class="mt-4 px-3">
+                <div class="card bg-primary-light border-0 p-3" style="border-radius: var(--radius-lg);">
+                    <div class="d-flex align-items-center gap-2 mb-2">
+                        <i class="bi bi-robot text-primary fs-5"></i>
+                        <h6 class="fw-bold mb-0 text-primary small">AI Consultant</h6>
+                    </div>
+                    <div class="small text-muted" style="font-size: 0.8rem; line-height: 1.4;">
+                        {{ profile.resume_ai_feedback | safe }}
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="px-3 mt-4">
+                <div class="card p-3 bg-secondary-light border-0" style="border-radius: var(--radius-lg);">
+                    <div class="d-flex justify-content-between mb-1">
+                        <span class="small fw-bold text-secondary">Profile Strength</span>
+                        <span class="small fw-bold text-success">{{ strength }}%</span>
+                    </div>
+                    <div class="progress" style="height: 6px; margin-bottom: 0;">
+                        <div class="progress-bar bg-success" role="progressbar" style="width: {{ strength }}%;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="px-3 mt-4">
+                <form method="post" action="{{ url_for('upload_resume') }}" enctype="multipart/form-data">
+                    <input type="file" class="form-control form-control-sm mb-2" name="resume" accept=".pdf,.doc,.docx"
+                        required>
+                    <button type="submit" class="btn btn-primary btn-sm w-100 fw-bold">Update CV</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="d-flex flex-column gap-4">
+
+        <!-- Mockup Style Internal Header -->
+        <div class="card border-0 bg-secondary-light p-3 px-4 d-flex flex-row justify-content-between align-items-center"
+            style="border-radius: var(--radius-xl);">
+            <div>
+                <h5 class="fw-bold mb-0">Welcome to <span class="text-primary">FinBridge</span> Smart Dashboard</h5>
+                <p class="small text-muted mb-0">Finance Year 2025 - 2026</p>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <div class="text-end d-none d-md-block">
+                    <h6 class="mb-0 fw-bold">{{ current_user.full_name }}</h6>
+                    <small class="text-success fw-bold">Online</small>
+                </div>
+                <div class="rounded-circle bg-primary-light text-primary d-flex align-items-center justify-content-center"
+                    style="width: 45px; height: 45px;">
+                    <i class="bi bi-person-circle fs-4"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Metrics -->
+        <div class="row g-3">
+            <div class="col-md-4">
+                <div class="accent-card purple">
+                    <div class="icon-box text-purple">
+                        <i class="bi bi-file-earmark-text"></i>
+                    </div>
+                    <div class="info">
+                        <div class="label">Total Apps</div>
+                        <div class="value">{{ applications|length }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="accent-card green">
+                    <div class="icon-box text-success">
+                        <i class="bi bi-check-circle"></i>
+                    </div>
+                    <div class="info">
+                        <div class="label">Shortlisted</div>
+                        <div class="value">{{ applications | selectattr('status', 'equalto', 'shortlisted') | list |
+                            length }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="accent-card gold">
+                    <div class="icon-box text-warning">
+                        <i class="bi bi-star"></i>
+                    </div>
+                    <div class="info">
+                        <div class="label">Matches</div>
+                        <div class="value">12</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card border-0 shadow-sm p-4 mt-2">
+            <h5 class="fw-bold mb-4">Hiring Pipeline Status</h5>
+            <div class="progress-stacked mb-4"
+                style="height: 24px; border-radius: 12px; overflow: hidden; background: rgba(255,255,255,0.05);">
+                {% if applications|length > 0 %}
+                {% set p_pend = ((applications | selectattr('status', 'equalto', 'pending') | list | length) /
+                applications|length * 100)|round %}
+                <div class="progress-bar bg-warning" role="progressbar" style="width: {{ p_pend }}%"
+                    title="Pending: {{ p_pend }}%"></div>
+                {% set p_short = ((applications | selectattr('status', 'equalto', 'shortlisted') | list | length) /
+                applications|length * 100)|round %}
+                <div class="progress-bar bg-info" role="progressbar" style="width: {{ p_short }}%"
+                    title="Shortlisted: {{ p_short }}%"></div>
+                {% else %}
+                <div class="progress-bar bg-secondary" role="progressbar" style="width: 100%">No applications yet</div>
+                {% endif %}
+            </div>
+            <div class="d-flex gap-4">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="rounded-circle bg-warning" style="width: 12px; height: 12px;"></div>
+                    <span class="small text-secondary fw-bold">Pending</span>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <div class="rounded-circle bg-info" style="width: 12px; height: 12px;"></div>
+                    <span class="small text-secondary fw-bold">Shortlisted</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Matches Ranking Section -->
+        <h5 class="fw-bold mb-3 mt-4">Top Job Matches (Mockup Layout)</h5>
+        <div class="row g-4 mb-2">
+            <div class="col-md-4">
+                <div class="ranking-card second">
+                    <img src="https://ui-avatars.com/api/?name=PwC&background=0a1631&color=d4af37"
+                        class="ranking-avatar" alt="PwC">
+                    <h6 class="fw-bold mb-1">PwC India</h6>
+                    <p class="small text-muted mb-3">Audit Associate</p>
+                    <div class="ranking-badge">2nd Best Match</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="ranking-card first">
+                    <img src="https://ui-avatars.com/api/?name=Deloitte&background=0a1631&color=d4af37"
+                        class="ranking-avatar" alt="Deloitte">
+                    <h6 class="fw-bold mb-1">Deloitte</h6>
+                    <p class="small text-muted mb-3">Tax Consultant</p>
+                    <div class="ranking-badge">1st Best Match</div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="ranking-card third">
+                    <img src="https://ui-avatars.com/api/?name=EY&background=0a1631&color=d4af37" class="ranking-avatar"
+                        alt="EY">
+                    <h6 class="fw-bold mb-1">EY Global</h6>
+                    <p class="small text-muted mb-3">Risk Advisory</p>
+                    <div class="ranking-badge">3rd Best Match</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Application History -->
+        <div class="card border-0 shadow-sm mt-2">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h5 class="fw-bold mb-0">Your Applications Tracking</h5>
+            </div>
+            <div class="table-responsive border-0">
+                <table class="table table-hover align-middle mb-0">
+                    <thead>
+                        <tr class="border-bottom border-secondary">
+                            <th class="border-0 text-secondary small py-3">Role / Company</th>
+                            <th class="border-0 text-secondary small py-3">Applied On</th>
+                            <th class="border-0 text-secondary small py-3">Status Tracker</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for app in applications %}
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="bg-primary-light text-primary rounded d-flex align-items-center justify-content-center fw-bold"
+                                        style="width: 40px; height: 40px;">
+                                        {{ (app.job.company.company_profile.company_name if
+                                        app.job.company.company_profile else app.job.company.full_name)[0] }}
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-0 fw-bold">{{ app.job.title }}</h6>
+                                        <small class="text-muted">{{ app.job.company.company_profile.company_name if
+                                            app.job.company.company_profile else app.job.company.full_name }}</small>
+                                    </div>
+                                </div>
+                            </td>
+                            <td><span class="text-secondary small fw-medium"><i class="bi bi-calendar3 me-1"></i> {{
+                                    app.created_at.strftime('%b %d, %Y') }}</span></td>
+                            <td style="width: 200px;">
+                                <span class="status w-100 text-center status-{{ app.status }}">{{ app.status }}</span>
+                                <!-- Pseudo-progress bar for application -->
+                                <div class="progress-stacked shadow-sm"
+                                    style="height: 10px; border-radius: 5px; overflow: hidden; background: rgba(255,255,255,0.05);">
+                                    {% if app.status == 'pending' %}
+                                    <div class="progress-bar bg-warning" role="progressbar" style="width: 25%"></div>
+                                    {% elif app.status == 'shortlisted' %}
+                                    <div class="progress-bar bg-info" role="progressbar" style="width: 60%"></div>
+                                    {% elif app.status == 'selected' %}
+                                    <div class="progress-bar bg-success" role="progressbar" style="width: 100%"></div>
+                                    {% elif app.status == 'rejected' %}
+                                    <div class="progress-bar bg-danger" role="progressbar" style="width: 100%"></div>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="3" class="text-center py-5">
+                                <div class="text-muted fs-2 mb-2"><i class="bi bi-journal-x"></i></div>
+                                <p class="text-secondary mb-0">You haven't applied to any jobs yet.</p>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- AI Recommendations Section [NEW] -->
+        {% if profile and (profile.ai_skills or profile.skills) %}
+        <div class="mb-2 animate-fade-in">
+            <div class="d-flex align-items-center gap-3 mb-4">
+                <h4 class="fw-bold mb-0">AI Recommended for You</h4>
+                <span
+                    class="badge bg-primary-light text-primary rounded-pill px-3 py-2 border border-primary-subtle">Personalized</span>
+            </div>
+            <div class="row g-4 mb-5">
+                {% set rec_found = false %}
+                {% for job in jobs %}
+                {% set match_score = get_match_score(current_user, job) %}
+                {% if match_score >= 40 %}
+                {% set rec_found = true %}
+                <div class="col-md-6">
+                    <div class="card h-100 p-4 border-0 shadow-sm hover-lift"
+                        style="border-radius: var(--radius-xl); border-left: 4px solid var(--primary-color) !important;">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
+                            <div class="bg-primary-light p-2 rounded-lg">
+                                <i class="bi bi-robot text-primary fs-4"></i>
+                            </div>
+                            <div class="text-end">
+                                <span class="badge bg-success text-white rounded-pill px-2 py-1 small fw-bold">{{
+                                    match_score }}% Match</span>
+                            </div>
+                        </div>
+                        <h5 class="fw-bold mb-1">{{ job.title }}</h5>
+                        <p class="text-secondary small mb-3"><i class="bi bi-building me-1"></i> {{
+                            job.company.company_profile.company_name if job.company.company_profile else
+                            job.company.full_name }}</p>
+
+                        <div class="mt-2 mb-3">
+                            {% set gap = get_skills_gap(current_user, job) %}
+                            <div class="d-flex flex-wrap gap-1">
+                                {% for s in gap.matched[:3] %}
+                                <span class="badge bg-success-light text-success border-success-subtle small"
+                                    style="font-size: 0.65rem;"><i class="bi bi-check-circle-fill"></i> {{ s }}</span>
+                                {% endfor %}
+                                {% for s in gap.missing[:2] %}
+                                <span class="badge bg-danger-light text-danger border-danger-subtle small"
+                                    style="font-size: 0.65rem;"><i class="bi bi-exclamation-triangle-fill"></i> {{ s
+                                    }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="mt-auto">
+                            <form action="{{ url_for('apply_job', job_id=job.id) }}" method="post">
+                                <button type="submit" class="btn btn-primary btn-sm w-100 fw-bold py-2 shadow-sm">Quick
+                                    Apply</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                {% if not rec_found %}
+                <div class="col-12">
+                    <div
+                        class="card bg-secondary-light border-secondary shadow-sm rounded-lg d-flex flex-row align-items-center gap-3 p-3">
+                        <i class="bi bi-info-circle text-primary fs-4"></i>
+                        <div>
+                            <h6 class="mb-0 fw-bold text-main">No high-match jobs found yet.</h6>
+                            <p class="mb-0 text-muted small">Update your skills or upload a fresh resume to get better
+                                recommendations.</p>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <hr class="my-5 opacity-10">
+        {% endif %}
+
+        <!-- Available Jobs -->
+        <h4 id="jobs" class="fw-bolder mt-4 mb-3 d-flex align-items-center gap-2"><i
+                class="bi bi-briefcase text-secondary"></i> All Opportunities</h4>
+        <div class="row g-4">
+            {% for job in jobs %}
+            <div class="col-md-6">
+                <div class="card h-100 p-4 border-0 shadow-sm transition-all" style="border-radius: var(--radius-xl);">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <h6 class="mb-0 fw-bold text-primary">{{ job.title }}</h6>
+                            <div class="d-flex align-items-center gap-2 mt-1">
+                                <small class="text-muted"><i class="bi bi-building me-1"></i> {{
+                                    job.company.company_profile.company_name if job.company.company_profile else
+                                    job.company.full_name }}</small>
+                                {% if job.pdf_jd_path %}
+                                <a href="{{ url_for('static', filename=job.pdf_jd_path) }}" target="_blank"
+                                    class="badge bg-info-light text-info text-decoration-none small">
+                                    <i class="bi bi-file-earmark-pdf-fill me-1"></i> JD
+                                </a>
+                                {% endif %}
+
+                                {% set m_score = get_match_score(current_user, job) %}
+                                {% if m_score > 0 %}
+                                <span
+                                    class="badge {% if m_score >= 70 %}bg-success{% elif m_score >= 40 %}bg-warning text-dark{% else %}bg-light text-secondary border{% endif %} small">
+                                    {{ m_score }}% AI Match
+                                </span>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <!-- Tags for quick info -->
+                        <div class="d-flex flex-column gap-1 align-items-end">
+                            <span class="badge bg-light text-muted border px-2 py-1"><i
+                                    class="bi bi-geo-alt-fill text-danger me-1"></i> {{ job.location }}</span>
+                            <span class="badge bg-success-light text-success fw-medium px-2 py-1"><i
+                                    class="bi bi-cash me-1"></i> {{ job.stipend }}</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 text-secondary text-truncate"
+                        style="max-height: 3rem; -webkit-line-clamp: 2; -webkit-box-orient: vertical; display: -webkit-box; white-space: normal;">
+                        {{ job.description }}
+                    </div>
+
+                    <form method="post" action="{{ url_for('apply_job', job_id=job.id) }}"
+                        class="mt-auto border-top pt-3">
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" name="cover_letter" id="cover_letter_{{ job.id }}"
+                                style="height: 80px" minlength="20" required></textarea>
+                            <label for="cover_letter_{{ job.id }}" class="small">Cover letter (Why you?)</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 fw-bold shadow-sm">Apply Now <i
+                                class="bi bi-arrow-right-short fs-5 lh-1"></i></button>
+                    </form>
+                </div>
+            </div>
+            {% else %}
+            <div class="col-12 py-4">
+                <div class="card border-0 shadow-sm p-5 text-center bg-light">
+                    <p class="text-secondary mb-0">No active job listings are available right now.</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}

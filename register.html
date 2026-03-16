@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}Sign Up - CA Bridge{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center py-4">
+    <div class="col-lg-10">
+        <div class="card border-0 shadow-lg overflow-hidden p-0" style="border-radius: var(--radius-2xl);">
+            <div class="row g-0 flex-md-row-reverse">
+                <!-- Branding Side -->
+                <div class="col-md-5 d-none d-md-block bg-primary text-white position-relative" style="background: var(--gradient-primary);">
+                    <div class="position-absolute top-0 start-0 bg-white" style="width: 250px; height: 250px; border-radius: 50%; opacity: 0.1; filter: blur(40px);"></div>
+                    <div class="position-absolute bottom-0 end-0 bg-white" style="width: 200px; height: 200px; border-radius: 50%; opacity: 0.05; filter: blur(50px);"></div>
+                    
+                    <div class="p-5 d-flex flex-column h-100 justify-content-center position-relative z-1">
+                        <h2 class="fw-bolder mb-3 text-white">Join the FinBridge</h2>
+                        <ul class="list-unstyled d-flex flex-column gap-4 mt-4">
+                            <li class="d-flex gap-3">
+                                <i class="bi bi-check-circle-fill fs-4 text-success-light"></i>
+                                <div>
+                                    <h2 class="fw-bolder">Get in Touch with FinBridge</h2>
+                                    <p class="text-white-50 small mb-0">Connect directly with Big 4 and leading mid-sized accounting firms.</p>
+                                </div>
+                            </li>
+                            <li class="d-flex gap-3">
+                                <i class="bi bi-check-circle-fill fs-4 text-success-light"></i>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Smart Matching</h6>
+                                    <p class="text-white-50 small mb-0">Get job recommendations that actually fit your profile and goals.</p>
+                                </div>
+                            </li>
+                            <li class="d-flex gap-3">
+                                <i class="bi bi-check-circle-fill fs-4 text-success-light"></i>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Instant Analytics</h6>
+                                    <p class="text-white-50 small mb-0">For companies: gain deep insights into your applicant pool.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Form Side -->
+                <div class="col-md-7">
+                    <div class="p-4 p-md-5 bg-white">
+                        <div class="text-center mb-4">
+                            <h3 class="fw-bold text-dark">Join FinBridge</h3>
+                            <p class="text-secondary">Join CA_Bridge to unlock opportunities</p>
+                        </div>
+                        
+                        <form method="POST" action="{{ url_for('register') }}">
+                            {{ form.hidden_tag() }}
+                            
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        {{ form.full_name(class="form-control", placeholder="Full Name/Company", id="full_name") }}
+                                        {{ form.full_name.label(for="full_name") }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        {{ form.email(class="form-control", placeholder="name@example.com", id="email") }}
+                                        {{ form.email.label(for="email") }}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row g-3 mb-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        {{ form.password(class="form-control", placeholder="Password", id="password") }}
+                                        {{ form.password.label(for="password") }}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        {{ form.confirm_password(class="form-control", placeholder="Confirm Password", id="confirm_password") }}
+                                        {{ form.confirm_password.label(for="confirm_password") }}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-floating mb-4">
+                                {{ form.role(class="form-select border-primary shadow-sm", id="role") }}
+                                {{ form.role.label(for="role") }}
+                                <div class="form-text mt-2"><i class="bi bi-info-circle me-1"></i> Are you looking for a job (Student) or hiring (Company)?</div>
+                            </div>
+                            
+                            <div class="form-check mb-4">
+                                <input class="form-check-input" type="checkbox" value="" id="terms" required>
+                                <label class="form-check-label text-secondary small" for="terms">
+                                    I agree to the <a href="#" class="text-decoration-none">Terms of Service</a> and <a href="#" class="text-decoration-none">Privacy Policy</a>
+                                </label>
+                            </div>
+                            
+                            {{ form.submit(class="btn btn-primary btn-lg w-100 fw-bold mb-4 py-3 shadow-sm") }}
+                            
+                            <div class="text-center">
+                                <p class="text-secondary small">Already have an account? <a href="{{ url_for('login') }}" class="fw-bold text-decoration-none">Log in</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,292 @@
+{% extends "base.html" %}
+
+{% block title %}CA Bridge - The Premier Platform for Finance Professionals{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="row align-items-center py-5 mb-5 g-5">
+    <div class="col-lg-6">
+        <h1 class="display-1 fw-bolder mb-3">Connecting CAs with <span class="text-gradient">FinBridge</span> Today</h1>
+        <p class="lead text-secondary mb-4 fs-5">Connecting Finance Talent with Opportunity. The exclusive platform for talented CA students and top-tier accounting firms.</p>
+        <div class="d-flex flex-wrap gap-3">
+            {% if not current_user.is_authenticated %}
+                <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg rounded-pill px-4 shadow-lg py-3">Get Started for Free <i class="bi bi-arrow-right ms-2"></i></a>
+                <a href="{{ url_for('about') }}" class="btn btn-outline-primary btn-lg rounded-pill px-4 py-3">Learn More</a>
+            {% else %}
+                {% if current_user.role == 'student' %}
+                    <a href="{{ url_for('student_dashboard') }}" class="btn btn-primary btn-lg rounded-pill px-4 shadow-lg py-3">Go to Dashboard <i class="bi bi-arrow-right ms-2"></i></a>
+                {% elif current_user.role == 'company' %}
+                    <a href="{{ url_for('company_dashboard') }}" class="btn btn-primary btn-lg rounded-pill px-4 shadow-lg py-3">Manage Jobs <i class="bi bi-arrow-right ms-2"></i></a>
+                {% endif %}
+            {% endif %}
+        </div>
+        
+        <div class="d-flex align-items-center gap-4 mt-5">
+            <div class="d-flex -space-x-2">
+                <img src="https://ui-avatars.com/api/?name=JS&background=random" class="rounded-circle border border-white border-2" width="40" height="40" alt="user" style="margin-left: -10px; z-index: 3;" />
+                <img src="https://ui-avatars.com/api/?name=JD&background=random" class="rounded-circle border border-white border-2" width="40" height="40" alt="user" style="margin-left: -10px; z-index: 2;" />
+                <img src="https://ui-avatars.com/api/?name=AK&background=random" class="rounded-circle border border-white border-2" width="40" height="40" alt="user" style="margin-left: -10px; z-index: 1;" />
+                <div class="rounded-circle border border-white border-2 bg-light d-flex align-items-center justify-content-center text-secondary fw-bold ms-n2" style="width: 40px; height: 40px; margin-left: -10px; z-index: 0; font-size: 0.8rem">+2k</div>
+            </div>
+            <div class="text-secondary small fw-medium">Join 2,000+ CA professionals<br>already hired.</div>
+        </div>
+    </div>
+    <div class="col-lg-6 position-relative">
+        <div class="position-absolute top-0 end-0 bg-primary-light rounded-circle" style="width: 400px; height: 400px; filter: blur(80px); opacity: 0.6; z-index: -1;"></div>
+        <div class="position-absolute bottom-0 start-0 bg-info-light rounded-circle" style="width: 300px; height: 300px; filter: blur(60px); opacity: 0.5; z-index: -1;"></div>
+        <div class="card border-0 shadow-lg p-3 glass animate-fade-in" style="border-radius: var(--radius-2xl);">
+            <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=800" alt="Dashboard Preview" class="img-fluid rounded-4 shadow-sm" style="object-fit: cover; max-height: 480px; width: 100%;">
+            
+            <!-- Floating badge 1 -->
+            <div class="position-absolute card border-0 shadow-lg p-3 d-flex align-items-center flex-row gap-3 animate-delay-2" style="bottom: -20px; left: -30px; border-radius: 1rem; width: 220px;">
+                <div class="bg-success-light text-success rounded-circle d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+                    <i class="bi bi-check-circle-fill fs-5"></i>
+                </div>
+                <div>
+                    <h6 class="mb-0 fw-bold">Interview Set</h6>
+                    <small class="text-muted">Deloitte India</small>
+                </div>
+            </div>
+            
+            <!-- Floating badge 2 -->
+            <div class="position-absolute card border-0 shadow-lg p-3 d-flex align-items-center flex-row gap-3 animate-delay-1" style="top: 40px; right: -40px; border-radius: 1rem; width: 220px;">
+                <div class="bg-primary-light text-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 45px; height: 45px;">
+                    <i class="bi bi-briefcase-fill fs-5"></i>
+                </div>
+                <div>
+                    <h6 class="mb-0 fw-bold">New Role Alert</h6>
+                    <small class="text-muted">₹12 LPA Package</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Trusted By Section -->
+<div class="py-4 text-center mb-5 border-top border-bottom border-light">
+    <p class="text-uppercase fw-bold text-muted small tracking-wider mb-4">Trusted by leading accounting firms & companies</p>
+    <div class="d-flex flex-wrap justify-content-center align-items-center gap-5 opacity-50 pe-none">
+        <h4 class="fw-bolder mb-0 font-monospace">PwC</h4>
+        <h4 class="fw-bolder mb-0 font-monospace">EY</h4>
+        <h4 class="fw-bolder mb-0 font-monospace">Deloitte</h4>
+        <h4 class="fw-bolder mb-0 font-monospace">KPMG</h4>
+        <h4 class="fw-bolder mb-0 font-monospace">Grant Thornton</h4>
+        <h4 class="fw-bolder mb-0 font-monospace">BDO</h4>
+    </div>
+</div>
+
+<!-- Features Section -->
+<div class="py-5 mb-5">
+    <div class="text-center mb-5">
+        <span class="badge bg-primary-light mb-2 px-3 py-2 text-primary fw-bold text-uppercase">Platform Features</span>
+        <h2 class="fw-bolder display-6">Everything you need to succeed</h2>
+        <p class="text-secondary mx-auto fs-5" style="max-width: 600px;">We've built a comprehensive suite of tools for both candidates and companies to streamline the remote and in-person hiring process.</p>
+    </div>
+    
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 p-4 border-0 shadow-sm text-center">
+                <div class="bg-primary-light text-primary rounded-circle d-inline-flex align-items-center justify-content-center mx-auto mb-4" style="width: 70px; height: 70px;">
+                    <i class="bi bi-magic fs-2"></i>
+                </div>
+                <h4 class="fw-bold mb-3">AI Recommendations</h4>
+                <p class="text-secondary mb-0">Our smart algorithm matches candidates with the perfect roles based on skills, location, and past experience.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 p-4 border-0 shadow-sm text-center">
+                <div class="bg-success-light text-success rounded-circle d-inline-flex align-items-center justify-content-center mx-auto mb-4" style="width: 70px; height: 70px;">
+                    <i class="bi bi-kanban fs-2"></i>
+                </div>
+                <h4 class="fw-bold mb-3">Seamless Tracking</h4>
+                <p class="text-secondary mb-0">Track application status in real-time. Know exactly when you're shortlisted, invited for an interview, or hired.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card h-100 p-4 border-0 shadow-sm text-center">
+                <div class="bg-warning-light text-warning rounded-circle d-inline-flex align-items-center justify-content-center mx-auto mb-4" style="width: 70px; height: 70px;">
+                    <i class="bi bi-graph-up-arrow fs-2"></i>
+                </div>
+                <h4 class="fw-bold mb-3">Career Analytics</h4>
+                <p class="text-secondary mb-0">Companies get rich analytics on applicant quality, time-to-hire, and job posting performance metrics.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Stats / How It Works -->
+<div class="row align-items-center py-5 mb-5 rounded-4 bg-primary text-white position-relative overflow-hidden shadow-lg p-5">
+    <div class="position-absolute top-0 end-0 h-100 w-50 bg-white" style="opacity: 0.05; clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);"></div>
+    <div class="col-lg-6 z-1">
+        <span class="badge text-white border border-white border-opacity-25 mb-3 px-3 py-2">Our Process</span>
+        <h2 class="display-5 fw-bold mb-4">How CA_Bridge Works</h2>
+        <div class="d-flex flex-column gap-4">
+            <div class="d-flex gap-3">
+                <div class="fs-4 fw-bold text-white opacity-50 mt-1">01</div>
+                <div>
+                    <h5 class="fw-bold text-white mb-1">Create an Account</h5>
+                    <p class="text-white-50 mb-0">Sign up as a candidate to look for jobs, or as a company to start hiring.</p>
+                </div>
+            </div>
+            <div class="d-flex gap-3">
+                <div class="fs-4 fw-bold text-white opacity-50 mt-1">02</div>
+                <div>
+                    <h5 class="fw-bold text-white mb-1">Complete Profile</h5>
+                    <p class="text-white-50 mb-0">Add your skills, resume, and experience to help companies find you.</p>
+                </div>
+            </div>
+            <div class="d-flex gap-3">
+                <div class="fs-4 fw-bold text-white opacity-50 mt-1">03</div>
+                <div>
+                    <h5 class="fw-bold text-white mb-1">Connect & Succeed</h5>
+                    <p class="text-white-50 mb-0">Apply to jobs with one click or invite candidates for interviews directly.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5 offset-lg-1 z-1 mt-5 mt-lg-0">
+        <div class="row g-3">
+            <div class="col-6">
+                <div class="bg-white bg-opacity-10 p-4 rounded-4 text-center backdrop-blur h-100 border border-white border-opacity-25">
+                    <h2 class="display-4 fw-bolder mb-0 text-white">5k+</h2>
+                    <p class="text-white-50 mb-0 fw-medium">Active Jobs</p>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="bg-white p-4 rounded-4 text-center h-100 border-0 shadow">
+                    <h2 class="display-4 fw-bolder mb-0 text-primary">12k+</h2>
+                    <p class="text-secondary mb-0 fw-medium">Candidates</p>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="bg-white p-4 rounded-4 text-center h-100 border-0 shadow">
+                    <h2 class="display-4 fw-bolder mb-0 text-primary">850</h2>
+                    <p class="text-secondary mb-0 fw-medium">Companies</p>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="bg-white bg-opacity-10 p-4 rounded-4 text-center backdrop-blur h-100 border border-white border-opacity-25">
+                    <h2 class="display-4 fw-bolder mb-0 text-white">98%</h2>
+                    <p class="text-white-50 mb-0 fw-medium">Success Rate</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Live Jobs Section -->
+<div class="py-5">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+        <div>
+            <h2 class="fw-bolder mb-2">Featured Opportunities</h2>
+            <p class="text-secondary mb-0">The latest articleships, industrial training, and CA roles.</p>
+        </div>
+        {% if not current_user.is_authenticated or current_user.role == 'student' %}
+        <a href="#" class="btn btn-outline-primary d-none d-md-inline-flex">View All Jobs <i class="bi bi-arrow-right ms-2"></i></a>
+        {% endif %}
+    </div>
+
+    <div class="row g-4">
+        {% if jobs %}
+            {% for job in jobs[:3] %}
+            <div class="col-lg-4 col-md-6 mb-2">
+                <div class="card h-100 p-3 border-0 shadow-sm transition-all" style="border-radius: var(--radius-xl);">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div class="bg-primary-light text-primary rounded-3 d-flex align-items-center justify-content-center fw-bold fs-4" style="width: 50px; height: 50px;">
+                            {{ job.company.company_profile.company_name[0] if job.company.company_profile else job.company.full_name[0] }}
+                        </div>
+                        <span class="badge bg-success-light text-success rounded-pill px-3 py-2 fw-medium"><i class="bi bi-clock-history me-1"></i> Just Posted</span>
+                    </div>
+                    
+                    <h5 class="fw-bold mb-1">{{ job.title }}</h5>
+                    <h6 class="text-muted fw-medium mb-3">{{ job.company.company_profile.company_name if job.company.company_profile else job.company.full_name }}</h6>
+                    
+                    <div class="d-flex flex-wrap gap-2 mb-4">
+                        <span class="badge bg-light text-secondary border px-2 py-1"><i class="bi bi-geo-alt-fill me-1 text-muted"></i> {{ job.location }}</span>
+                        <span class="badge bg-light text-secondary border px-2 py-1"><i class="bi bi-cash-stack me-1 text-muted"></i> {{ job.stipend }}</span>
+                    </div>
+                    
+                    <div class="mt-auto pt-3 border-top d-flex gap-2">
+                        {% if current_user.is_authenticated and current_user.role == 'student' %}
+                            <form method="post" action="{{ url_for('apply_job', job_id=job.id) }}" class="w-100">
+                                <!-- using a modal or quick apply action in full version, but here we redirect or direct button -->
+                                <button type="submit" class="btn btn-primary w-100 fw-bold">Quick Apply</button>
+                            </form>
+                        {% else %}
+                            <a href="{{ url_for('login') }}" class="btn btn-outline-primary w-100 fw-bold">Sign in to Apply</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="col-12 mt-4 text-center d-md-none">
+                 <a href="#" class="btn btn-outline-primary btn-lg w-100">View All Jobs</a>
+            </div>
+        {% else %}
+            <div class="col-12 text-center py-5">
+                <div class="p-5 bg-white rounded-4 shadow-sm border border-light d-inline-block">
+                    <div class="text-muted fs-1 mb-3"><i class="bi bi-search"></i></div>
+                    <h4 class="fw-bold">No active jobs right now</h4>
+                    <p class="text-secondary mx-auto" style="max-width: 400px;">Check back soon as companies post new opportunities every day.</p>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Testimonials -->
+<div class="py-5 mb-5 bg-white rounded-5 p-5 shadow-sm border border-light">
+    <div class="text-center mb-5">
+        <h2 class="fw-bolder display-6">Loved by professionals</h2>
+        <p class="text-secondary">Don't just take our word for it.</p>
+    </div>
+    
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card p-4 h-100 border bg-light">
+                <div class="text-warning mb-3 fs-5">
+                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p class="fs-6 italic text-secondary mb-4">"CA_Bridge made finding an articleship so easy. The platform is incredibly intuitive, and I landed interviews with top firms within a week!"</p>
+                <div class="d-flex align-items-center gap-3 mt-auto">
+                    <img src="https://ui-avatars.com/api/?name=Rohan+Patel&background=random" class="rounded-circle" width="45" height="45">
+                    <div>
+                        <h6 class="mb-0 fw-bold">Rohan Patel</h6>
+                        <small class="text-muted">Placed at Big4</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-4 h-100 border bg-light">
+                <div class="text-warning mb-3 fs-5">
+                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p class="fs-6 italic text-secondary mb-4">"As a recruiting manager, the analytics and candidate filtering features save me hours every week. Best platform out there."</p>
+                <div class="d-flex align-items-center gap-3 mt-auto">
+                    <img src="https://ui-avatars.com/api/?name=Priya+Sharma&background=random" class="rounded-circle" width="45" height="45">
+                    <div>
+                        <h6 class="mb-0 fw-bold">Priya Sharma</h6>
+                        <small class="text-muted">HR Director</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card p-4 h-100 border bg-light">
+                <div class="text-warning mb-3 fs-5">
+                    <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                </div>
+                <p class="fs-6 italic text-secondary mb-4">"Highly recommended! The UI is gorgeous, it's fast, and the job recommendations actually make sense unlike other boards."</p>
+                <div class="d-flex align-items-center gap-3 mt-auto">
+                    <img src="https://ui-avatars.com/api/?name=Amit+Kumar&background=random" class="rounded-circle" width="45" height="45">
+                    <div>
+                        <h6 class="mb-0 fw-bold">Amit Kumar</h6>
+                        <small class="text-muted">Industrial Trainee</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

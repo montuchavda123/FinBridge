@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+
+{% block title %}About FinBridge{% endblock %}
+
+{% block content %}
+<div class="row align-items-center py-5 mb-5 g-5">
+    <div class="col-lg-6">
+        <span class="badge bg-primary-light text-primary mb-3 px-3 py-2 fw-bold text-uppercase">Our Story</span>
+        <h1 class="display-4 fw-bolder mb-3">Bridging the Gap in <span class="text-gradient">Finance</span></h1>
+        <p class="lead text-secondary mb-4 fs-5">FinBridge was founded with a single mission: to make the process of finding articleships and CA roles transparent, fast, and merit-based.</p>
+        <p class="text-secondary mb-4">We noticed that talented students often struggled to find the right firms, and top firms struggled to filter through thousands of emails. By building a dedicated platform with smart matching, we've revolutionized how the finance industry hires.</p>
+        <div class="row g-3 mt-2">
+            <div class="col-6">
+                <h3 class="fw-bold text-primary mb-1">2026</h3>
+                <p class="text-muted small fw-medium">Year Founded</p>
+            </div>
+            <div class="col-6">
+                <h3 class="fw-bold text-primary mb-1">100+</h3>
+                <p class="text-muted small fw-medium">Cities Served</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="position-relative">
+            <div class="position-absolute top-0 end-0 bg-info-light rounded-circle" style="width: 300px; height: 300px; filter: blur(60px); opacity: 0.5; z-index: -1;"></div>
+            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=800" alt="Team meeting" class="img-fluid rounded-4 shadow-lg w-100" style="object-fit: cover; height: 450px;">
+            <div class="position-absolute bottom-0 start-0 translate-middle-x card border-0 shadow p-4 d-none d-md-block" style="border-radius: var(--radius-xl); bottom: 10% !important;">
+                <h4 class="fw-bolder mb-1">Our Mission</h4>
+                <p class="text-secondary mb-0 small">Empowering every CA to reach their full potential.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- How FinBridge Works Pipeline -->
+<div class="py-5 mb-5">
+    <div class="text-center mb-5">
+        <span class="badge bg-success-light text-success mb-2 px-3 py-2 text-uppercase fw-bold">The Process</span>
+        <h2 class="fw-bolder display-6">Connecting Talent to Opportunity</h2>
+        <p class="text-secondary mx-auto fs-5" style="max-width: 600px;">A seamless, step-by-step pipeline ensuring candidates land the best roles and companies find the right match.</p>
+    </div>
+    <div class="row g-4 position-relative">
+        <!-- Connecting Line -->
+        <div class="d-none d-lg-block position-absolute bg-primary opacity-25" style="height: 2px; width: 80%; top: 50%; left: 10%; z-index: 0;"></div>
+        
+        <div class="col-lg-3 col-md-6 text-center position-relative z-1">
+            <div class="bg-white rounded-circle shadow-sm d-flex align-items-center justify-content-center mx-auto mb-4 border border-2 border-primary" style="width: 80px; height: 80px;">
+                <i class="bi bi-person-vcard text-primary fs-2"></i>
+            </div>
+            <h5 class="fw-bold">1. Profile Creation</h5>
+            <p class="text-secondary small">Candidates build rich profiles showcasing skills, exam scores, and resumes.</p>
+        </div>
+        <div class="col-lg-3 col-md-6 text-center position-relative z-1">
+            <div class="bg-white rounded-circle shadow-sm d-flex align-items-center justify-content-center mx-auto mb-4 border border-2 border-info" style="width: 80px; height: 80px;">
+                <i class="bi bi-search text-info fs-2"></i>
+            </div>
+            <h5 class="fw-bold">2. Smart Discovery</h5>
+            <p class="text-secondary small">Advanced filtering allows candidates to find roles and companies to source talent.</p>
+        </div>
+        <div class="col-lg-3 col-md-6 text-center position-relative z-1">
+            <div class="bg-white rounded-circle shadow-sm d-flex align-items-center justify-content-center mx-auto mb-4 border border-2 border-warning" style="width: 80px; height: 80px;">
+                <i class="bi bi-chat-square-text text-warning fs-2"></i>
+            </div>
+            <h5 class="fw-bold">3. Apply & Connect</h5>
+            <p class="text-secondary small">Candidates submit single-click applications. Recruiters organize pools instantly.</p>
+        </div>
+        <div class="col-lg-3 col-md-6 text-center position-relative z-1">
+            <div class="bg-white rounded-circle shadow-sm d-flex align-items-center justify-content-center mx-auto mb-4 border border-2 border-success" style="width: 80px; height: 80px;">
+                <i class="bi bi-handshake text-success fs-2"></i>
+            </div>
+            <h5 class="fw-bold">4. Hire & Succeed</h5>
+            <p class="text-secondary small">Interviews are scheduled, candidates are tracked, and successful hires are made.</p>
+        </div>
+    </div>
+</div>
+
+<!-- Leadership / Team Section -->
+<div class="py-5 bg-light rounded-5 p-4 p-md-5 mb-5 shadow-sm border border-white">
+    <div class="text-center mb-5">
+        <h2 class="fw-bolder display-6">Meet the Leadership</h2>
+        <p class="text-secondary mx-auto" style="max-width: 500px;">We are a team of tech experts and former finance professionals striving to disrupt recruitment.</p>
+    </div>
+    <div class="row justify-content-center g-4">
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm text-center p-4">
+                <img src="https://ui-avatars.com/api/?name=Arjun+Patel&background=random&size=150" class="rounded-circle mx-auto mb-3 shadow-sm" alt="CEO">
+                <h5 class="fw-bold mb-1">Arjun Patel</h5>
+                <p class="text-primary fw-medium small mb-3">CEO & Co-Founder</p>
+                <p class="text-secondary small mb-0">Former Big4 auditor who realized the recruitment process needed a technological upgrade.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm text-center p-4">
+                <img src="https://ui-avatars.com/api/?name=Neha+Gupta&background=random&size=150" class="rounded-circle mx-auto mb-3 shadow-sm" alt="CTO">
+                <h5 class="fw-bold mb-1">Neha Gupta</h5>
+                <p class="text-primary fw-medium small mb-3">Chief Technology Officer</p>
+                <p class="text-secondary small mb-0">Full-stack engineering expert leading the platform architecture and data matching algorithms.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm text-center p-4">
+                <img src="https://ui-avatars.com/api/?name=Karan+Singh&background=random&size=150" class="rounded-circle mx-auto mb-3 shadow-sm" alt="Head of Partnerships">
+                <h5 class="fw-bold mb-1">Karan Singh</h5>
+                <p class="text-primary fw-medium small mb-3">Head of Partnerships</p>
+                <p class="text-secondary small mb-0">Building firm relationships and bringing the top tier accounting firms to the platform.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="py-5 bg-white rounded-5 p-5 shadow-sm border border-light text-center mb-5">
+    <h2 class="fw-bolder mb-4">Join the Movement</h2>
+    <p class="text-secondary mx-auto mb-4 fs-5" style="max-width: 600px;">Whether you're looking for your first articleship, a post-qualification role, or hiring the next generation of leaders—you belong here.</p>
+    {% if not current_user.is_authenticated %}
+        <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg rounded-pill px-5 shadow-sm">Sign Up Today</a>
+    {% endif %}
+</div>
+{% endblock %}

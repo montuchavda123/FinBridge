@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block title %}Contact Us - CA Bridge{% endblock %}
+
+{% block content %}
+<div class="row py-5 g-5">
+    <div class="col-lg-5">
+        <h1 class="display-5 fw-bolder mb-3">Get in <span class="text-gradient">Touch</span></h1>
+        <p class="lead text-secondary mb-4">Have questions about our platform, need help with your account, or want to discuss enterprise hiring? We're here to help.</p>
+        
+        <div class="d-flex flex-column gap-4 mt-5">
+            <div class="d-flex align-items-center gap-3">
+                <div class="bg-primary-light text-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                    <i class="bi bi-envelope-fill fs-5"></i>
+                </div>
+                <div>
+                    <h6 class="fw-bold mb-1">Email Support</h6>
+                    <p class="text-muted mb-0">support@cabridge.com</p>
+                </div>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <div class="bg-primary-light text-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                    <i class="bi bi-geo-alt-fill fs-5"></i>
+                </div>
+                <div>
+                    <h6 class="fw-bold mb-1">Headquarters</h6>
+                    <p class="text-muted mb-0">Mumbai, Maharashtra, India</p>
+                </div>
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <div class="bg-primary-light text-primary rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px;">
+                    <i class="bi bi-clock-fill fs-5"></i>
+                </div>
+                <div>
+                    <h6 class="fw-bold mb-1">Working Hours</h6>
+                    <p class="text-muted mb-0">Mon - Fri, 9:00 AM to 6:00 PM IST</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-7">
+        <div class="card p-4 p-md-5 border-0 shadow-lg" style="border-radius: var(--radius-2xl);">
+            <h3 class="fw-bold mb-4">Send us a message</h3>
+            <form method="post" action="{{ url_for('contact') }}">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="John Doe" required>
+                            <label for="name">Full Name</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="john@example.com" required>
+                            <label for="email">Email Address</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="phone" name="phone" placeholder="+91">
+                            <label for="phone">Phone Number (Optional)</label>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-floating">
+                            <select class="form-select" id="subject" name="subject" required>
+                                <option value="" selected disabled>Select subject...</option>
+                                <option value="support">General Support</option>
+                                <option value="billing">Billing & Plans</option>
+                                <option value="sales">Enterprise Sales</option>
+                                <option value="feedback">Feedback</option>
+                            </select>
+                            <label for="subject">Subject</label>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-floating">
+                            <textarea class="form-control" id="message" name="message" placeholder="How can we help?" style="height: 150px" required></textarea>
+                            <label for="message">Your Message</label>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold">Send Message <i class="bi bi-send ms-2"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Map and FAQ Section -->
+<div class="row py-5 mt-4 g-5 border-top border-light">
+    <!-- Map Integration -->
+    <div class="col-lg-6">
+        <h3 class="fw-bolder mb-4">Our Office Location</h3>
+        <div class="card border-0 shadow-sm overflow-hidden" style="border-radius: var(--radius-xl); height: 400px;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d241316.59124445888!2d72.74109867918881!3d19.082544622170886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c6306644edc1%3A0x5da4ed8f8d648c69!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1709400000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+
+    <!-- Frequently Asked Questions -->
+    <div class="col-lg-6">
+        <h3 class="fw-bolder mb-4">Frequently Asked Questions</h3>
+        <div class="accordion" id="faqAccordion">
+            <div class="accordion-item border-0 mb-3 shadow-sm rounded-4 overflow-hidden">
+                <h2 class="accordion-header">
+                    <button class="accordion-button fw-bold bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
+                        Is CA Bridge free for students?
+                    </button>
+                </h2>
+                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body text-secondary bg-white">
+                        Yes! CA Bridge is completely free for CA students and professionals looking for articleships or job opportunities. Simply sign up, complete your profile, and start applying.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item border-0 mb-3 shadow-sm rounded-4 overflow-hidden">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed fw-bold bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
+                        How do companies post jobs?
+                    </button>
+                </h2>
+                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body text-secondary bg-white">
+                        Companies must first register as an Employer. Once verified, you can access your Company Dashboard to post new job openings, specify requirements, and manage incoming applications.
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item border-0 mb-3 shadow-sm rounded-4 overflow-hidden">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed fw-bold bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
+                        How are applications tracked?
+                    </button>
+                </h2>
+                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body text-secondary bg-white">
+                        Both candidates and companies have real-time dashboards. Candidates can see if their application is 'Pending', 'Shortlisted', 'Selected', or 'Rejected'. Companies can change these statuses which instantly reflects on the candidate's end.
+                    </div>
+                </div>
+            </div>
+            
+            <div class="accordion-item border-0 mb-3 shadow-sm rounded-4 overflow-hidden">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed fw-bold bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#faq4" aria-expanded="false" aria-controls="faq4">
+                        Do you offer interview preparation?
+                    </button>
+                </h2>
+                <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body text-secondary bg-white">
+                        Yes, we have a curated Resource Hub available in the dashboard that provides interview preparation material, resume building guides, and firm insights specifically geared towards Tier-1 accounting firms.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

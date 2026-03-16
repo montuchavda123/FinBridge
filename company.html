@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Company Resources - CA Bridge{% endblock %}
+
+{% block content %}
+<div class="row py-4 align-items-center mb-5 flex-md-row-reverse">
+    <div class="col-lg-7 text-end">
+        <span class="badge bg-success-light text-success px-3 py-2 fw-bold text-uppercase mb-3">Employer Hub</span>
+        <h1 class="display-4 fw-bolder mb-3">Hire the Best <span class="text-gradient">CA Talent</span></h1>
+        <p class="lead text-secondary ms-auto" style="max-width: 500px;">Access advanced recruitment tools, employer branding resources, and analytics to optimize your hiring pipeline.</p>
+    </div>
+    <div class="col-lg-5 text-center d-none d-lg-block position-relative">
+        <div class="position-absolute top-50 start-50 translate-middle bg-success-light rounded-circle" style="width: 250px; height: 250px; filter: blur(50px); opacity: 0.6; z-index: -1;"></div>
+        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=600" alt="Team collaborating" class="img-fluid rounded-4 shadow-lg" style="width: 100%; height: 350px; object-fit: cover;">
+    </div>
+</div>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-6">
+        <div class="card h-100 p-5 border-0 shadow-sm" style="border-radius: var(--radius-2xl); background: linear-gradient(135deg, #0f172a, #1e293b); color: white;">
+            <div class="mb-4">
+                <i class="bi bi-graph-up-arrow fs-1 text-primary"></i>
+            </div>
+            <h3 class="fw-bold text-white mb-3">Talent Pool Analytics</h3>
+            <p class="text-white-50 mb-4">Gain insights into what candidates are searching for. Understand salary trends for articles and qualified CAs in your region.</p>
+            <a href="#" class="btn btn-primary fw-bold mt-auto align-self-start">View Latest Report</a>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100 p-5 border-0 shadow-sm bg-primary text-white" style="border-radius: var(--radius-2xl);">
+            <div class="mb-4 text-white-50">
+                <i class="bi bi-star-fill fs-1"></i>
+            </div>
+            <h3 class="fw-bold text-white mb-3">Employer Branding</h3>
+            <p class="text-white-50 mb-4">Best practices on writing compelling job descriptions and setting up a company profile that attracts top percentile candidates.</p>
+            <a href="#" class="btn btn-light fw-bold text-primary mt-auto align-self-start">Optimize Profile</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

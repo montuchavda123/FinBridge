@@ -1,0 +1,285 @@
+{% extends 'base.html' %}
+{% block title %}Admin Control Panel - CA Bridge{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <!-- Header Section -->
+    <div class="row mb-5 align-items-center bg-white p-4 rounded-4 shadow-sm border border-light">
+        <div class="col-md-8">
+            <div class="d-flex align-items-center gap-3">
+                <div class="bg-danger-light text-danger rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 56px; height: 56px;">
+                    <i class="bi bi-shield-lock-fill fs-3"></i>
+                </div>
+                <div>
+                    <h2 class="fw-bolder mb-1">FinBridge Panel</h2>
+                    <p class="text-secondary mb-0">Manage users, monitor platform activity, and control system content.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 text-md-end mt-4 mt-md-0">
+            <span class="badge bg-dark text-white px-4 py-2 fs-6 rounded-pill shadow-sm"><i class="bi bi-clock-history me-2"></i> System Status: <span class="text-success">Healthy</span></span>
+        </div>
+    </div>
+
+    <!-- Quick Stats Overview -->
+    <div class="row g-4 mb-5">
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-0 shadow-sm h-100 rounded-4 overflow-hidden position-relative group">
+                <div class="position-absolute end-0 top-0 p-3 opacity-25" style="transform: rotate(15deg); font-size: 5rem;">
+                    <i class="bi bi-people-fill text-primary"></i>
+                </div>
+                <div class="card-body p-4 position-relative z-1 d-flex flex-column justify-content-between">
+                    <h6 class="text-uppercase text-secondary fw-bold tracking-wider mb-4"><i class="bi bi-mortarboard-fill me-2 text-primary"></i>Total Students</h6>
+                    <div>
+                        <h2 class="display-4 fw-bolder text-dark mb-0 line-height-1">{{ stats.students }}</h2>
+                        <div class="d-flex align-items-center gap-2 mt-2">
+                            <span class="badge bg-success-light text-success rounded-pill"><i class="bi bi-arrow-up-short"></i> Active network</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-primary" style="height: 4px; width: 100%;"></div>
+            </div>
+        </div>
+        
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-0 shadow-sm h-100 rounded-4 overflow-hidden position-relative">
+                <div class="position-absolute end-0 top-0 p-3 opacity-25" style="transform: rotate(-10deg); font-size: 5rem;">
+                    <i class="bi bi-buildings-fill text-success"></i>
+                </div>
+                <div class="card-body p-4 position-relative z-1 d-flex flex-column justify-content-between">
+                    <h6 class="text-uppercase text-secondary fw-bold tracking-wider mb-4"><i class="bi bi-building-fill-check me-2 text-success"></i>Partner Firms</h6>
+                    <div>
+                        <h2 class="display-4 fw-bolder text-dark mb-0 line-height-1">{{ stats.companies }}</h2>
+                        <div class="d-flex align-items-center gap-2 mt-2">
+                            <span class="badge bg-success-light text-success rounded-pill"><i class="bi bi-arrow-up-short"></i> Hiring partners</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-success" style="height: 4px; width: 100%;"></div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-0 shadow-sm h-100 rounded-4 overflow-hidden position-relative">
+                <div class="position-absolute end-0 top-0 p-3 opacity-25" style="transform: rotate(5deg); font-size: 5rem;">
+                    <i class="bi bi-briefcase-fill text-info"></i>
+                </div>
+                <div class="card-body p-4 position-relative z-1 d-flex flex-column justify-content-between">
+                    <h6 class="text-uppercase text-secondary fw-bold tracking-wider mb-4"><i class="bi bi-megaphone-fill me-2 text-info"></i>Live Jobs</h6>
+                    <div>
+                        <h2 class="display-4 fw-bolder text-dark mb-0 line-height-1">{{ stats.active_jobs }}</h2>
+                        <div class="d-flex align-items-center gap-2 mt-2">
+                             <span class="badge bg-primary-light text-primary rounded-pill"><i class="bi bi-activity"></i> Active listings</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-info" style="height: 4px; width: 100%;"></div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-0 shadow-sm h-100 rounded-4 overflow-hidden position-relative text-white" style="background: linear-gradient(135deg, #1e293b, #0f172a);">
+                <div class="position-absolute end-0 top-0 p-3 opacity-10" style="transform: rotate(-15deg); font-size: 5rem;">
+                    <i class="bi bi-file-earmark-check-fill text-white"></i>
+                </div>
+                <div class="card-body p-4 position-relative z-1 d-flex flex-column justify-content-between">
+                    <h6 class="text-uppercase text-white-50 fw-bold tracking-wider mb-4"><i class="bi bi-envelope-paper-fill me-2 text-warning"></i>Total Applications</h6>
+                    <div>
+                        <h2 class="display-4 fw-bolder text-white mb-0 line-height-1">{{ stats.total_applications }}</h2>
+                        <div class="d-flex align-items-center gap-2 mt-2">
+                            <span class="text-white-50 small fw-medium">Platform-wide</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-warning" style="height: 4px; width: 100%;"></div>
+            </div>
+        </div>
+    </div> <!-- /Stats Row -->
+
+    <div class="row g-4">
+        <!-- User Management Panel -->
+        <div class="col-12">
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                <div class="card-header bg-white border-bottom p-4 d-flex justify-content-between align-items-center">
+                    <h5 class="fw-bold mb-0 d-flex align-items-center gap-2">
+                        <i class="bi bi-people-fill text-primary"></i> User Directory & Management
+                    </h5>
+                    <div class="d-flex gap-2">
+                        <span class="badge bg-light text-dark border px-3 py-2"><i class="bi bi-shield-lock-fill text-danger me-1"></i> {{ stats.admins }} Admins</span>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
+                        <table class="table table-hover align-middle mb-0 border-0">
+                            <thead class="bg-light sticky-top shadow-sm z-2">
+                                <tr>
+                                    <th class="border-0 px-4 py-3 text-secondary text-uppercase tracking-wider small fw-bold">User</th>
+                                    <th class="border-0 py-3 text-secondary text-uppercase tracking-wider small fw-bold">Role Profile</th>
+                                    <th class="border-0 py-3 text-secondary text-uppercase tracking-wider small fw-bold">Joined</th>
+                                    <th class="border-0 py-3 text-secondary text-uppercase tracking-wider small fw-bold">Account Status</th>
+                                    <th class="border-0 px-4 py-3 text-end text-secondary text-uppercase tracking-wider small fw-bold">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in users %}
+                                    <tr class="border-bottom">
+                                        <td class="px-4 py-3">
+                                            <div class="d-flex align-items-center gap-3">
+                                                <div class="rounded-circle d-flex align-items-center justify-content-center fw-bold shadow-sm 
+                                                    {% if user.role == 'admin' %}bg-danger text-white
+                                                    {% elif user.role == 'company' %}bg-success text-white
+                                                    {% else %}bg-primary text-white{% endif %}" 
+                                                    style="width: 42px; height: 42px;">
+                                                    {{ user.full_name[0] | upper }}
+                                                </div>
+                                                <div>
+                                                    <h6 class="fw-bold mb-0 text-dark">{{ user.full_name }}</h6>
+                                                    <a href="mailto:{{ user.email }}" class="text-secondary small text-decoration-none">{{ user.email }}</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="py-3">
+                                            {% if user.role == 'student' %}
+                                                <span class="badge bg-primary-light text-primary border border-primary-subtle px-3 py-2 rounded-pill"><i class="bi bi-mortarboard-fill me-1"></i> Student Candidate</span>
+                                            {% elif user.role == 'company' %}
+                                                <span class="badge bg-success-light text-success border border-success-subtle px-3 py-2 rounded-pill"><i class="bi bi-building me-1"></i> Corporate Firm</span>
+                                            {% else %}
+                                                <span class="badge bg-danger text-white px-3 py-2 rounded-pill shadow-sm"><i class="bi bi-shield-lock-fill me-1"></i> Administrator</span>
+                                            {% endif %}
+                                        </td>
+                                        <td class="py-3 text-secondary fw-medium">
+                                            {{ user.created_at.strftime('%b %d, %Y') }}
+                                        </td>
+                                        <td class="py-3">
+                                            {% if user.is_active_user %}
+                                                <div class="d-inline-flex align-items-center gap-2 bg-success-light text-success px-3 py-1 rounded-pill fw-bold" style="font-size: 0.85rem;">
+                                                    <span class="spinner-grow spinner-grow-sm text-success" style="width: 8px; height: 8px;"></span> Active
+                                                </div>
+                                            {% else %}
+                                                <div class="d-inline-flex align-items-center gap-2 bg-danger-light text-danger px-3 py-1 rounded-pill fw-bold" style="font-size: 0.85rem;">
+                                                    <i class="bi bi-slash-circle"></i> Suspended
+                                                </div>
+                                            {% endif %}
+                                        </td>
+                                        <td class="px-4 py-3 text-end">
+                                            {% if user.id != current_user.id %}
+                                                <form method="post" action="{{ url_for('toggle_user_status', user_id=user.id) }}">
+                                                    {% if user.is_active_user %}
+                                                        <button class="btn btn-sm btn-outline-danger fw-bold rounded-pill px-3 shadow-sm transition-all hover-scale" type="submit">
+                                                            Suspend Account
+                                                        </button>
+                                                    {% else %}
+                                                        <button class="btn btn-sm btn-success fw-bold rounded-pill px-3 shadow-sm transition-all hover-scale" type="submit">
+                                                            Restore Access
+                                                        </button>
+                                                    {% endif %}
+                                                </form>
+                                            {% else %}
+                                                <span class="badge bg-dark text-white rounded-pill px-3 py-2 shadow-sm"><i class="bi bi-person-check-fill me-1"></i> Current Session</span>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Global Jobs Moderation Panel -->
+        <div class="col-12 mt-5">
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+                <div class="card-header bg-white border-bottom p-4 d-flex justify-content-between align-items-center">
+                    <h5 class="fw-bold mb-0 d-flex align-items-center gap-2">
+                        <i class="bi bi-globe-americas text-info"></i> Global Job Moderation
+                    </h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
+                        <table class="table table-hover align-middle mb-0 border-0">
+                            <thead class="bg-light sticky-top shadow-sm z-2">
+                                <tr>
+                                    <th class="border-0 px-4 py-3 text-secondary text-uppercase tracking-wider small fw-bold">Listing Info</th>
+                                    <th class="border-0 py-3 text-secondary text-uppercase tracking-wider small fw-bold">Employer</th>
+                                    <th class="border-0 py-3 text-secondary text-uppercase tracking-wider small fw-bold">Date Posted</th>
+                                    <th class="border-0 py-3 text-secondary text-uppercase tracking-wider small fw-bold">Visibility</th>
+                                    <th class="border-0 px-4 py-3 text-end text-secondary text-uppercase tracking-wider small fw-bold">Control</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for job in jobs %}
+                                    <tr class="border-bottom">
+                                        <td class="px-4 py-3">
+                                            <div class="d-flex flex-column">
+                                                <span class="fw-bold text-dark fs-6">{{ job.title }}</span>
+                                                <div class="d-flex align-items-center gap-2 mt-1">
+                                                    <span class="badge bg-light text-secondary border px-2 py-1"><i class="bi bi-hash"></i>{{ job.id }}</span>
+                                                    <span class="text-muted small"><i class="bi bi-geo-alt-fill text-danger me-1"></i>{{ job.location }}</span>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="py-3">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <i class="bi bi-building-fill text-muted"></i>
+                                                <span class="fw-bold text-secondary">{{ job.company.company_profile.company_name if job.company.company_profile else job.company.full_name }}</span>
+                                            </div>
+                                        </td>
+                                        <td class="py-3 text-secondary fw-medium">
+                                            {{ job.created_at.strftime('%b %d, %Y at %I:%M %p') }}
+                                        </td>
+                                        <td class="py-3">
+                                            {% if job.is_active %}
+                                                <div class="d-inline-flex align-items-center gap-2 bg-info-light text-info border border-info-subtle px-3 py-1 rounded-pill fw-bold" style="font-size: 0.85rem;">
+                                                    <span class="spinner-grow spinner-grow-sm text-info" style="width: 6px; height: 6px;"></span> Published
+                                                </div>
+                                            {% else %}
+                                                <div class="d-inline-flex align-items-center gap-2 bg-light text-secondary border px-3 py-1 rounded-pill fw-bold" style="font-size: 0.85rem;">
+                                                    <i class="bi bi-eye-slash-fill"></i> Taken Down
+                                                </div>
+                                            {% endif %}
+                                        </td>
+                                        <td class="px-4 py-3 text-end">
+                                            <form method="post" action="{{ url_for('admin_toggle_job', job_id=job.id) }}">
+                                                {% if job.is_active %}
+                                                    <button class="btn btn-sm btn-outline-danger fw-bold rounded-pill px-3 shadow-sm transition-all hover-scale" type="submit" title="Remove listing from public view">
+                                                        <i class="bi bi-x-octagon-fill me-1"></i> Takedown
+                                                    </button>
+                                                {% else %}
+                                                    <button class="btn btn-sm btn-success fw-bold rounded-pill px-3 shadow-sm transition-all hover-scale" type="submit" title="Restore listing to public view">
+                                                        <i class="bi bi-arrow-clockwise me-1"></i> Restore
+                                                    </button>
+                                                {% endif %}
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td colspan="5" class="text-center py-5 text-muted">
+                                            <i class="bi bi-inbox fs-1 mb-3 d-block text-secondary opacity-50"></i>
+                                            <h5 class="fw-bold">No Job Listings</h5>
+                                            <p>There are currently no jobs posted on the platform.</p>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.hover-scale:hover {
+    transform: translateY(-2px);
+}
+.tracking-wider {
+    letter-spacing: 0.05em;
+}
+.line-height-1 {
+    line-height: 1;
+}
+</style>
+{% endblock %}
